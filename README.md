@@ -6,9 +6,9 @@ Interface: Abstrakte Klasse: binSuchbaum
           abstrakte Methoden: Knoten  getKnotenLinks(Knoten wurzel)
                               Knoten  getKnotenRechts(Knoten wurzel)
                     
-          Implem Methoden:    String getInsort()
-                              String getPostsort()
-                              Strinf getPresort()
+          Implem Methoden:    array getInsort()
+                              array getPostsort()
+                              array getPresort()
 
 
 
