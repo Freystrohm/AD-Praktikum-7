@@ -15,5 +15,7 @@ Interface: Abstrakte Klasse: binSuchbaum
 Knoten Container: interface Knoten<T> 
                     
 Aufgabenteilung:
+
     Phil: Implementireung Array-Baum, getPresort(), getPostsort
+        
     Johannes: Implementierung Zeigerbaum, getInsort(), abstrakte Klasse, Container Interface
