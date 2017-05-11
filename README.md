@@ -12,7 +12,7 @@ Interface: Abstrakte Klasse: binSuchbaum
 
 
 
-Knoten Container: interface Knoten<T> 
+Knoten Container: interface Knoten< T > 
                     
 Aufgabenteilung:
 
