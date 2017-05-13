@@ -9,7 +9,9 @@ package binaerSuchbaum;
 public interface Knoten<T extends Comparable<T>> {
 	public T getElement();
 
-	public Knoten<T> getKnotenLinks();
+	public Knoten<T> getKnotenSonLinks();
 
-	public Knoten<T> getKnotenRechts();
+	public Knoten<T> getKnotenSonRechts();
+	
+	public Knoten<T> getKnotenFather();
 }
