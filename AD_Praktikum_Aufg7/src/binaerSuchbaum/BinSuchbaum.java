@@ -8,9 +8,14 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 {
 	private Knoten<T> wurzel;
 	
+	public BinSuchbaum(Knoten<T> wurzel)
+	{
+		this.wurzel = wurzel;
+	}
+	
 	public abstract void insertKnoten(Knoten<T> knoten);
 	
-	public T[] getInsorder()
+	public T[] getInorder()
 	{
 		return null;
 	}
