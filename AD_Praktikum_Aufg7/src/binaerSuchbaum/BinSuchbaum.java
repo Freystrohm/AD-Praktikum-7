@@ -10,17 +10,17 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	
 	public abstract void insertKnoten(Knoten<T> knoten);
 	
-	public T[] getInsort()
+	public T[] getInsorder()
 	{
 		return null;
 	}
 	
-	public T[] getPresort()
+	public T[] getPreorder()
 	{
 		return null;
 	}
 	
-	public T[] getPostsort()
+	public T[] getPostorder()
 	{
 		return null;
 	}
