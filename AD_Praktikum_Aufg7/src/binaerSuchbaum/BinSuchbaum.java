@@ -15,17 +15,18 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 {
 	private Knoten<T> wurzel;
 
+	
+	public BinSuchbaum(Knoten<T> wurzel)
+	{
+		this.wurzel = wurzel;
+	}
+	
 	/**
 	 * Funktion zum einfügen eines Knotens in den Binärbaum
 	 * 
 	 * @param knoten:
 	 *            einzufügender Knoten
 	 */
-	public BinSuchbaum(Knoten<T> wurzel)
-	{
-		this.wurzel = wurzel;
-	}
-	
 	public abstract void insertKnoten(Knoten<T> knoten);
 	
 	public T[] getInorder()
