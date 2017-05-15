@@ -1,7 +1,7 @@
 /**
- * PMT/PT1 Praktikum Aufgabenblatt 
+ * 
  * @author Johannes Kruber
- * @author Luis Nickel 
+ *
  */
 
 package binaerSuchbaum;
