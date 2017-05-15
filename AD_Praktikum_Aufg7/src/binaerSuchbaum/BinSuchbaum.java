@@ -29,6 +29,11 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	 */
 	public abstract void insertKnoten(Knoten<T> knoten);
 	
+	/**
+	 * Funktion für die Array darstellung des baumes nach dem Inorder Prinzip
+	 * 
+	 * @return: Der Baum dargestellt als nach inorder sortiertes Array
+	 */
 	public T[] getInorder()
 	{
 		return null;
