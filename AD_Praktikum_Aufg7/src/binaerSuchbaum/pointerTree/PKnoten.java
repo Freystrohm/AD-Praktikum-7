@@ -8,7 +8,7 @@ package binaerSuchbaum.pointerTree;
 
 import binaerSuchbaum.Knoten;
 
-class PKnoten<T extends Comparable<T>> implements Knoten<T>
+public class PKnoten<T extends Comparable<T>> implements Knoten<T>
 {
 	PKnoten <T> father, sonLinks, sonRechts;
 	T element;

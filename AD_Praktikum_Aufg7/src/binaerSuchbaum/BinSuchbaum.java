@@ -13,7 +13,7 @@ package binaerSuchbaum;
  */
 public abstract class BinSuchbaum<T extends Comparable<T>>
 {
-	private Knoten<T> wurzel;
+	protected Knoten<T> wurzel;
 
 	
 	public BinSuchbaum(Knoten<T> wurzel)

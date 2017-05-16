@@ -21,8 +21,48 @@ public class PTree<T extends Comparable<T>> extends BinSuchbaum<T>
 	@Override
 	public void insertKnoten(Knoten<T> knoten)
 	{
-		// TODO Auto-generated method stub
-		
+		if (knoten instanceof PKnoten)
+		{
+			PKnoten<T> father = (PKnoten<T>)super.wurzel;
+			while (true)
+			{
+				if (knoten.getElement().compareTo(father.getElement()) < 0)
+				{
+					if (father.getKnotenSonLinks() == null)
+					{
+						father.sonLinks = (PKnoten<T>)knoten;
+						break;
+					}
+					else
+					{
+						father = father.sonLinks;
+					}
+
+				}
+				else if(father.getElement().compareTo(knoten.getElement()) > 0)
+				{
+					if (father.sonRechts == null)
+					{
+						father.sonRechts = (PKnoten<T>)knoten;
+						break;
+					}
+					else
+					{
+						father = father.sonLinks;
+					}
+				}
+				else
+				{
+					System.out.println("Knoten schon vorhanden");
+					break;
+				}
+			}
+
+		}
+		else
+		{
+			System.out.println("Falscher Knoten");
+		}
 	}
 
 }
