@@ -3,6 +3,9 @@
  */
 package binaerSuchbaum;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 /**
  * Abstracte Klasse, die als Interface für die beiden Implementationen des
  * Binärbaumes fungiert und die verschiedenen Order Methoden bereitstellt
@@ -14,13 +17,13 @@ package binaerSuchbaum;
 public abstract class BinSuchbaum<T extends Comparable<T>>
 {
 	protected Knoten<T> wurzel;
+	private LinkedList<Knoten<T>> list;
 
-	
 	public BinSuchbaum(Knoten<T> wurzel)
 	{
 		this.wurzel = wurzel;
 	}
-	
+
 	/**
 	 * Funktion zum einfügen eines Knotens in den Binärbaum
 	 * 
@@ -28,7 +31,7 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	 *            einzufügender Knoten
 	 */
 	public abstract void insertKnoten(Knoten<T> knoten);
-	
+
 	/**
 	 * Funktion für die Array darstellung des baumes nach dem Inorder Prinzip
 	 * 
@@ -36,11 +39,73 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	 */
 	public T[] getInorder()
 	{
-		return null;
+		list = new LinkedList<Knoten<T>>();
+
+		if (wurzel.getKnotenSonLinks() != null)
+		{
+			inorderLeft(wurzel.getKnotenSonLinks());
+		}
+		if (wurzel.getKnotenSonRechts() != null)
+		{
+			inorderRight(wurzel.getKnotenSonRechts());
+		}
+
+		return listToTArray();
 	}
 
 	/**
-	 * Funktion für die Array darstellung des baumes nach dem Preorder Prinzip
+	 * wandelt die Liste in ein T[] array um
+	 * @return T[]
+	 */
+	private T[] listToTArray()
+	{
+		@SuppressWarnings("unchecked")
+		T[] array = (T[]) new Object[list.size()];
+
+		for (int i = 0; i < array.length; i++)
+		{
+			array[i] = list.get(i).getElement();
+		}
+		return array;
+	}
+	
+	/**
+	 *  Funktion für die linken Teilbäume 
+	 * @param k
+	 */
+	private void inorderLeft(Knoten<T> k)
+	{
+		list.add(list.indexOf(k.getKnotenFather()), k);
+		if (k.getKnotenSonLinks() != null)
+		{
+			inorderLeft(k.getKnotenSonLinks());
+		}
+		if (k.getKnotenSonRechts() != null)
+		{
+			inorderRight(k.getKnotenSonRechts());
+		}
+	}
+
+	
+	/**
+	 *  Funktion für die rechten Teilbäume 
+	 * @param k
+	 */
+	private void inorderRight(Knoten<T> k)
+	{
+		list.add(list.indexOf(k.getKnotenFather()) + 1, k);
+		if (k.getKnotenSonLinks() != null)
+		{
+			inorderLeft(k.getKnotenSonLinks());
+		}
+		if (k.getKnotenSonRechts() != null)
+		{
+			inorderRight(k.getKnotenSonRechts());
+		}
+	}
+
+	/**
+	 * Funktion für die Array Darstellung des Baumes nach dem Preorder Prinzip
 	 * 
 	 * @return: Der Baum dargestellt als nach preorder sortiertes Array
 	 */
@@ -50,7 +115,7 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	}
 
 	/**
-	 * Funktion für die Array darstellung des baumes nach dem Postorder Prinzip
+	 * Funktion für die Array Darstellung des Baumes nach dem Postorder Prinzip
 	 * 
 	 * @return: Der Baum dargestellt als nach postorder sortiertes Array
 	 */
