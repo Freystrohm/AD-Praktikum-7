@@ -31,7 +31,7 @@ public class main
 //
 //		System.out.println("Summe 3- 9:" + a.sum(3, 9));
 		
-		BinSuchbaum<Integer> b = new PTree<>(new PKnoten<Integer>(6));
+		BinSuchbaum<Integer> b = new PTree(new PKnoten<Integer>(6));
 
 		b.insertKnoten(new PKnoten<Integer>(4));
 		b.insertKnoten(new PKnoten<Integer>(9));
@@ -40,14 +40,10 @@ public class main
 		b.insertKnoten(new PKnoten<Integer>(8));
 		b.insertKnoten(new PKnoten<Integer>(3));
 		b.insertKnoten(new PKnoten<Integer>(5));
-		b.insertKnoten(new PKnoten<Integer>(2));
 		
 		b.inorder(b.wurzel);
-		Iterator<Knoten<Integer>> iterator = b.list.iterator();
-		while(iterator.hasNext()){
-			System.out.println(iterator.next().getElement());
-		}
-		int a = 5;
+		System.out.println("Sum: "+b.sum(3, 9));
+		
 	}
 
 }

@@ -46,6 +46,9 @@ public class AKnoten<T extends Comparable<T>> implements Knoten<T> {
 	@Override
 	public Knoten<T> getKnotenSonLinks() {
 		// TODO Auto-generated method stub
+		if(indexImArray * 2 + 1 >= array.length){
+			return null;
+		}
 		return array[indexImArray * 2 + 1];
 	}
 

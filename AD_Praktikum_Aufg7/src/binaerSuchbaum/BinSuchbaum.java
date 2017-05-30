@@ -4,6 +4,7 @@
 package binaerSuchbaum;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -170,7 +171,8 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 
 			minKnoten = wurzel;
 			maxKnoten = wurzel;
-
+			
+			/*
 			while (minKnoten.getKnotenSonLinks() != null
 					&& (int) minKnoten.getKnotenSonLinks().getElement() >= min)
 			{
@@ -182,10 +184,47 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 			{
 				maxKnoten = maxKnoten.getKnotenSonRechts();
 			}
-
-			return wurzel.getSumLinks() + wurzel.getSumRechts()
-					- minKnoten.getSumLinks() - maxKnoten.getSumRechts()
-					+ (int) wurzel.getElement();
+			*/
+			
+			Iterator<Knoten<T>> it = list.iterator();
+			
+			int smallestDiff = wurzel.getSumLinks()+wurzel.getSumRechts();
+			
+			//get Node near min
+			Knoten<T> node;
+			do{
+				node =  it.next();
+				if(Math.abs((Integer) node.getElement() - min )<= smallestDiff){
+					minKnoten=node;
+					smallestDiff= Math.abs((Integer) node.getElement() - min);
+				}
+			}while(it.hasNext());
+			
+			//get Node near max
+			smallestDiff = wurzel.getSumLinks()+wurzel.getSumRechts();
+			it = list.iterator();
+			do{
+				node =  it.next();
+				if(Math.abs((Integer) node.getElement() - max )<= smallestDiff){
+					maxKnoten=node;
+					smallestDiff= Math.abs((Integer) node.getElement() - max);
+				}
+			}while(it.hasNext());
+			
+			
+			
+			int debug =0;
+			
+			//maxknoten ist father von minKnoten
+			if(maxKnoten.getKnotenSonLinks() == minKnoten){
+				return 0;
+			}
+			
+			return  wurzel.getSumLinks() + wurzel.getSumRechts()
+			- minKnoten.getSumLinks() - maxKnoten.getSumRechts()
+			+ (Integer) wurzel.getElement();
+			
+		
 
 		}
 		return 0;

@@ -54,7 +54,7 @@ public class PKnoten<T extends Comparable<T>> implements Knoten<T>
 	@Override
 	public int getSumLinks()
 	{
-		return sumrechts;
+		return sumlinks;
 	}
 
 }

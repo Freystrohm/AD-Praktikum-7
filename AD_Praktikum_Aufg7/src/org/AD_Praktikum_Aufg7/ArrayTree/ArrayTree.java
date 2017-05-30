@@ -12,6 +12,7 @@ public class ArrayTree<T extends Comparable<T>> extends BinSuchbaum<T> {
 		super(wurzel);
 		array[0] = wurzel;
 		wurzel.setIndex(0);
+		wurzel.array = array;
 	}
 
 	/**
@@ -30,6 +31,7 @@ public class ArrayTree<T extends Comparable<T>> extends BinSuchbaum<T> {
 			array = tmpArray;
 		}
 		if (array[index] == null) {
+			knoten.array= array;
 			knoten.setIndex(index);
 			array[index] = knoten;
 		} else if (knoten.getElement().compareTo(array[index].getElement()) < 0) {
