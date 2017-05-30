@@ -9,9 +9,9 @@ public class ArrayTree<T extends Comparable<T>> extends BinSuchbaum<T> {
 	AKnoten[] array = new AKnoten[1000];
 
 	public ArrayTree(AKnoten<T> wurzel) {
-		super(null);
+		super(wurzel);
 		array[0] = wurzel;
-		wurzel.addToSumUeberKnoten((Integer) wurzel.getElement());
+		wurzel.setIndex(0);
 	}
 
 	/**
@@ -30,13 +30,13 @@ public class ArrayTree<T extends Comparable<T>> extends BinSuchbaum<T> {
 			array = tmpArray;
 		}
 		if (array[index] == null) {
-			knoten.addToSumUeberKnoten((Integer) knoten.getElement());
+			knoten.setIndex(index);
 			array[index] = knoten;
 		} else if (knoten.getElement().compareTo(array[index].getElement()) < 0) {
-			array[index].addToSumUeberKnoten((Integer) knoten.getElement());
+			array[index].sumlinks+=(int)knoten.getElement();
 			knotenEinfügen(knoten, index * 2 + 1);
 		} else {
-			array[index].addToSumUeberKnoten((Integer) knoten.getElement());
+			array[index].sumrechts+=(int)knoten.getElement();
 			knotenEinfügen(knoten, index * 2 + 2);
 		}
 
@@ -112,14 +112,14 @@ public class ArrayTree<T extends Comparable<T>> extends BinSuchbaum<T> {
 
 	@Override
 	public void insertKnoten(Knoten<T> knoten) {
+		((AKnoten) knoten).array = array;
 		if (array[0] == null) {
-
 			array[0] = (AKnoten) knoten;
 		} else if (knoten.getElement().compareTo((T) array[0].getElement()) < 0) {
-			array[0].addToSumUeberKnoten((Integer) knoten.getElement());
+			array[0].sumlinks+=(int)knoten.getElement();
 			knotenEinfügen((AKnoten) knoten, 1);
 		} else {
-			array[0].addToSumUeberKnoten((Integer) knoten.getElement());
+			array[0].sumrechts+=(int)knoten.getElement();
 			knotenEinfügen((AKnoten) knoten, 2);
 		}
 
@@ -135,50 +135,6 @@ public class ArrayTree<T extends Comparable<T>> extends BinSuchbaum<T> {
 		}
 		return summe + (int) array[index].getElement();
 
-	}
-
-	public int getSummeZwischenKnonten(int m, int M) {
-		int sum = 0;
-		
-		int knotenA = findIndexForM(m);
-		int knotenB = findIndexForM(M);
-
-		int knotenAistAufSeite = identitfyTreeSide(knotenA);
-		int knotenBistAufSeite = identitfyTreeSide(knotenB);
-
-		if (knotenAistAufSeite == 1 && knotenBistAufSeite == 1) {
-			sum = array[0].getSumUeberKnoten() - array[1].getSumUeberKnoten() - (array[knotenA].getSumUeberKnoten()
-					+ array[knotenB].getSumUeberKnoten() + (Integer) array[0].getElement());
-		} else {
-			sum = (Integer) array[0].getSumUeberKnoten()
-					- ((Integer) array[knotenA].getSumUeberKnoten() + (Integer) array[knotenB].getSumUeberKnoten());
-		}
-
-		return sum;
-	}
-	
-	/**
-	 * findIndexForM
-	 * 
-	 * finds node with nearest value to m
-	 * @param m one bounce from the given intervall 
-	 * @return index - the index from the node with the nearest value to m
-	 */
-	private int findIndexForM(int m) {
-		int index = 0;
-		int smallestDiff = array[0].getSumUeberKnoten();
-		for (int i = 0; i < array.length; i++) {
-		
-			if(array[i] == null){
-				continue;
-			}
-			if ((Integer) array[i].getElement() - m >= 0 && (Integer) array[i].getElement() - m <= smallestDiff) {
-				smallestDiff = (Integer) array[i].getElement() - m;
-				index = i;
-			}
-		}
-
-		return index;
 	}
 
 	/**
@@ -215,7 +171,6 @@ public class ArrayTree<T extends Comparable<T>> extends BinSuchbaum<T> {
 
 		a.ausgabe(AusgabeAuswahl.INORDER);
 		System.out.println("Summe aller Kinder" + a.getSummeAllerKinder(0));
-		System.out.println("Sum über Knoten:" + a.getSummeZwischenKnonten(1, 35));
 	}
 
 }

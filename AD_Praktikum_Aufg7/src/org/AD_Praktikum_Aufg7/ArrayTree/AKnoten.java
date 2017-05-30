@@ -12,9 +12,15 @@ public class AKnoten<T extends Comparable<T>> implements Knoten<T> {
 	private AKnoten<T> rechterKindKnoten;
 	private T wert;
 	private int sumUeberKnoten = 0;
+	AKnoten[] array;
+	private int indexImArray;
+	int sumlinks, sumrechts;
+	
 
 	public AKnoten(T wert) {
 		this.wert = wert;
+		sumlinks=0;
+		sumrechts=0;
 	}
 
 	public T getElement() {
@@ -40,13 +46,13 @@ public class AKnoten<T extends Comparable<T>> implements Knoten<T> {
 	@Override
 	public Knoten<T> getKnotenSonLinks() {
 		// TODO Auto-generated method stub
-		return null;
+		return array[indexImArray * 2 + 1];
 	}
 
 	@Override
 	public Knoten<T> getKnotenSonRechts() {
 		// TODO Auto-generated method stub
-		return null;
+		return array[indexImArray * 2 + 2];
 	}
 
 	@Override
@@ -56,20 +62,21 @@ public class AKnoten<T extends Comparable<T>> implements Knoten<T> {
 	}
 
 	@Override
-	public void setSumUeberKnoten(int sum) {
-		this.sumUeberKnoten = sum;
-
-	}
-
-	@Override
-	public void addToSumUeberKnoten(int toAdd) {
-		sumUeberKnoten += toAdd;
-	}
-
-	@Override
-	public int getSumUeberKnoten() {
+	public int getSumRechts()
+	{
 		// TODO Auto-generated method stub
-		return sumUeberKnoten;
+		return sumrechts;
+	}
+
+	@Override
+	public int getSumLinks()
+	{
+		// TODO Auto-generated method stub
+		return sumlinks;
+	}
+	
+	public void setIndex(int index){
+		this.indexImArray = index;
 	}
 
 }

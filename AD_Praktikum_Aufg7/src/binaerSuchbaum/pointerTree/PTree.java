@@ -44,7 +44,7 @@ public class PTree<T extends Comparable<T>> extends BinSuchbaum<T>
 					}
 
 				}
-				else if (father.getElement().compareTo(knoten.getElement()) > 0)
+				else if (knoten.getElement().compareTo(father.getElement()) > 0)
 				{
 					if (knoten.getElement() instanceof Integer)
 					{

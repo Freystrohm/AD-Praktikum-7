@@ -17,7 +17,7 @@ import java.util.LinkedList;
 public abstract class BinSuchbaum<T extends Comparable<T>>
 {
 	protected Knoten<T> wurzel;
-	private LinkedList<Knoten<T>> list;
+	LinkedList<Knoten<T>> list= new LinkedList<Knoten<T>>();
 
 	public BinSuchbaum(Knoten<T> wurzel)
 	{
@@ -107,23 +107,47 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	}
 
 	/**
-	 * Funktion für die Array Darstellung des Baumes nach dem Preorder Prinzip
-	 * 
-	 * @return: Der Baum dargestellt als nach preorder sortiertes Array
+	 * Hilfsmethode zum Ausgeben der Hauptreihenfolge.
+	 * @param index: Index im Array
 	 */
-	public T[] getPreorder()
-	{
-		return null;
+	public void preorder(Knoten k){
+		list.add(k);
+		if(k.getKnotenSonLinks()!=null){
+			preorder(k.getKnotenSonLinks());
+		}
+		if(k.getKnotenSonRechts()!= null){
+			preorder(k.getKnotenSonRechts());
+		}
 	}
 
 	/**
-	 * Funktion für die Array Darstellung des Baumes nach dem Postorder Prinzip
-	 * 
-	 * @return: Der Baum dargestellt als nach postorder sortiertes Array
+	 * Hilfsmethode zum Ausgeben der Nebenreihenfolge.y
 	 */
-	public T[] getPostorder()
-	{
-		return null;
+	public void postorder(Knoten k){
+		if(k.getKnotenSonLinks()!=null){
+			postorder(k.getKnotenSonLinks());
+		}
+		
+		if(k.getKnotenSonRechts()!= null){
+			postorder(k.getKnotenSonRechts());
+		}
+		list.add(k);
+	}
+	
+	/**
+	 * Hilfsmethode zum Ausgeben der Symmetrischenreihenfolge.
+	 * @param index: Index im Array
+	 */
+	public void inorder(Knoten k){
+		if(k.getKnotenSonLinks()!=null){
+			inorder(k.getKnotenSonLinks());
+		}
+		list.add(k);
+		
+		if(k.getKnotenSonRechts()!= null){
+			inorder(k.getKnotenSonRechts());
+		}
+		
 	}
 
 	public int sum(int min, int max)
@@ -147,14 +171,16 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 			minKnoten = wurzel;
 			maxKnoten = wurzel;
 
-			while ((int) minKnoten.getKnotenSonLinks().getElement() >= min)
+			while (minKnoten.getKnotenSonLinks() != null
+					&& (int) minKnoten.getKnotenSonLinks().getElement() >= min)
 			{
 				minKnoten = minKnoten.getKnotenSonLinks();
 			}
 
-			while ((int) maxKnoten.getKnotenSonRechts().getElement() >= min)
+			while (maxKnoten.getKnotenSonLinks() != null
+					&& (int) maxKnoten.getKnotenSonRechts().getElement() <= max)
 			{
-				minKnoten = minKnoten.getKnotenSonRechts();
+				maxKnoten = maxKnoten.getKnotenSonRechts();
 			}
 
 			return wurzel.getSumLinks() + wurzel.getSumRechts()
