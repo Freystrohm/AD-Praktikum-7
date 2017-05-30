@@ -35,14 +35,13 @@ public class main
 
 		b.insertKnoten(new PKnoten<Integer>(4));
 		b.insertKnoten(new PKnoten<Integer>(9));
-		b.insertKnoten(new PKnoten<Integer>(10));
 		b.insertKnoten(new PKnoten<Integer>(7));
 		b.insertKnoten(new PKnoten<Integer>(8));
 		b.insertKnoten(new PKnoten<Integer>(3));
 		b.insertKnoten(new PKnoten<Integer>(5));
 		
 		b.inorder(b.wurzel);
-		System.out.println("Sum: "+b.sum(3, 9));
+		System.out.println("Sum: "+b.sum(3, 500));
 		
 	}
 

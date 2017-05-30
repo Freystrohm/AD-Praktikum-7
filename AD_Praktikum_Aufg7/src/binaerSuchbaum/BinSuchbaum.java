@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import org.omg.CORBA.INTERNAL;
+
 /**
  * Abstracte Klasse, die als Interface für die beiden Implementationen des
  * Binärbaumes fungiert und die verschiedenen Order Methoden bereitstellt
@@ -153,7 +155,7 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 
 	public int sum(int min, int max)
 	{
-		Knoten<T> minKnoten, maxKnoten, wurzel = this.wurzel;
+		Knoten<T> minKnoten = null, maxKnoten = null, wurzel = this.wurzel;
 		if (wurzel.getElement() instanceof Integer)
 		{
 			while ((int) wurzel.getElement() > max
@@ -169,8 +171,6 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 				}
 			}
 
-			minKnoten = wurzel;
-			maxKnoten = wurzel;
 			
 			/*
 			while (minKnoten.getKnotenSonLinks() != null
@@ -188,7 +188,7 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 			
 			Iterator<Knoten<T>> it = list.iterator();
 			
-			int smallestDiff = wurzel.getSumLinks()+wurzel.getSumRechts();
+			int smallestDiff = Integer.MAX_VALUE;;
 			
 			//get Node near min
 			Knoten<T> node;
@@ -201,7 +201,7 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 			}while(it.hasNext());
 			
 			//get Node near max
-			smallestDiff = wurzel.getSumLinks()+wurzel.getSumRechts();
+			smallestDiff = Integer.MAX_VALUE;
 			it = list.iterator();
 			do{
 				node =  it.next();
