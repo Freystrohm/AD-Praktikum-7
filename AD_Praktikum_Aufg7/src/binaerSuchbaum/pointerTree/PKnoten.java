@@ -10,18 +10,20 @@ import binaerSuchbaum.Knoten;
 
 public class PKnoten<T extends Comparable<T>> implements Knoten<T>
 {
-	public  PKnoten <T> father, sonLinks, sonRechts;
+	PKnoten<T> father, sonLinks, sonRechts;
 	public T element;
-	public int sumUeberKnoten;
+	int sumlinks = 0, sumrechts = 0;
 
-	public PKnoten (T value){
+	public PKnoten(T value)
+	{
 		element = value;
 	}
-	
-	public PKnoten (){
-		
+
+	public PKnoten()
+	{
+
 	}
-	
+
 	@Override
 	public T getElement()
 	{
@@ -47,25 +49,15 @@ public class PKnoten<T extends Comparable<T>> implements Knoten<T>
 	}
 
 	@Override
-	public void setSumUeberKnoten(int sum) {
-		this.sumUeberKnoten = sum;
-		
+	public int getSumRechts()
+	{
+		return sumrechts;
 	}
 
 	@Override
-	public void addToSumUeberKnoten(int toAdd) {
-		sumUeberKnoten+=toAdd;
+	public int getSumLinks()
+	{
+		return sumrechts;
 	}
-	
-	@Override
-	public int getSumUeberKnoten() {
-		// TODO Auto-generated method stub
-		return sumUeberKnoten;
-	}
-	
-	public void setFather(PKnoten node){
-		father=node;
-	}
-	
 
 }

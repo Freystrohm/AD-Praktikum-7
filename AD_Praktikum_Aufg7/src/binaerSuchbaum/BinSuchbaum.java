@@ -55,6 +55,7 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 
 	/**
 	 * wandelt die Liste in ein T[] array um
+	 * 
 	 * @return T[]
 	 */
 	private T[] listToTArray()
@@ -68,9 +69,10 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 		}
 		return array;
 	}
-	
+
 	/**
-	 *  Funktion für die linken Teilbäume 
+	 * Funktion für die linken Teilbäume
+	 * 
 	 * @param k
 	 */
 	private void inorderLeft(Knoten<T> k)
@@ -86,9 +88,9 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 		}
 	}
 
-	
 	/**
-	 *  Funktion für die rechten Teilbäume 
+	 * Funktion für die rechten Teilbäume
+	 * 
 	 * @param k
 	 */
 	private void inorderRight(Knoten<T> k)
@@ -122,5 +124,43 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	public T[] getPostorder()
 	{
 		return null;
+	}
+
+	public int sum(int min, int max)
+	{
+		Knoten<T> minKnoten, maxKnoten, wurzel = this.wurzel;
+		if (wurzel.getElement() instanceof Integer)
+		{
+			while ((int) wurzel.getElement() > max
+					|| (int) wurzel.getElement() < min)
+			{
+				if ((int) wurzel.getElement() > max)
+				{
+					wurzel = wurzel.getKnotenSonLinks();
+				}
+				else if ((int) wurzel.getElement() < min)
+				{
+					wurzel = wurzel.getKnotenSonRechts();
+				}
+			}
+
+			minKnoten = wurzel;
+			maxKnoten = wurzel;
+
+			while ((int) minKnoten.getKnotenSonLinks().getElement() >= min)
+			{
+				minKnoten = minKnoten.getKnotenSonLinks();
+			}
+
+			while ((int) maxKnoten.getKnotenSonRechts().getElement() >= min)
+			{
+				minKnoten = minKnoten.getKnotenSonRechts();
+			}
+
+			return wurzel.getSumLinks() + wurzel.getSumRechts()
+					- minKnoten.getSumLinks() - maxKnoten.getSumRechts() + (int)wurzel.getElement();
+
+		}
+		return 0;
 	}
 }
