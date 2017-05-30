@@ -8,15 +8,17 @@ package binaerSuchbaum.pointerTree;
 
 import binaerSuchbaum.Knoten;
 
-public class PKnoten<T extends Comparable<T>> implements Knoten<T>
+class PKnoten<T extends Comparable<T>> implements Knoten<T>
 {
 	PKnoten<T> father, sonLinks, sonRechts;
 	public T element;
-	int sumlinks = 0, sumrechts = 0;
+	int sumlinks, sumrechts;
 
 	public PKnoten(T value)
 	{
 		element = value;
+		sumlinks = 0;
+		sumrechts = 0;
 	}
 
 	public PKnoten()

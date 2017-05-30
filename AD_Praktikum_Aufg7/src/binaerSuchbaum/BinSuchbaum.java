@@ -158,7 +158,8 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 			}
 
 			return wurzel.getSumLinks() + wurzel.getSumRechts()
-					- minKnoten.getSumLinks() - maxKnoten.getSumRechts() + (int)wurzel.getElement();
+					- minKnoten.getSumLinks() - maxKnoten.getSumRechts()
+					+ (int) wurzel.getElement();
 
 		}
 		return 0;
