@@ -35,7 +35,8 @@ public class PTree<T extends Comparable<T>> extends BinSuchbaum<T>
 					}
 					if (father.getKnotenSonLinks() == null)
 					{
-						father.sonLinks = (PKnoten<T>) knoten;
+						this.addKleinerZahlen(knoten);
+						father.sonLinks = (PKnoten<T>) knoten;					
 						break;
 					}
 					else
@@ -52,6 +53,7 @@ public class PTree<T extends Comparable<T>> extends BinSuchbaum<T>
 					}
 					if (father.sonRechts == null)
 					{
+						this.addKleinerZahlen(knoten);
 						father.sonRechts = (PKnoten<T>) knoten;
 						break;
 					}

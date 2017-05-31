@@ -17,13 +17,11 @@ import org.omg.CORBA.INTERNAL;
  *
  * @param <T>
  */
-public abstract class BinSuchbaum<T extends Comparable<T>>
-{
+public abstract class BinSuchbaum<T extends Comparable<T>> {
 	protected Knoten<T> wurzel;
-	LinkedList<Knoten<T>> list= new LinkedList<Knoten<T>>();
+	LinkedList<Knoten<T>> list = new LinkedList<Knoten<T>>();
 
-	public BinSuchbaum(Knoten<T> wurzel)
-	{
+	public BinSuchbaum(Knoten<T> wurzel) {
 		this.wurzel = wurzel;
 	}
 
@@ -40,16 +38,13 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	 * 
 	 * @return: Der Baum dargestellt als nach inorder sortiertes Array
 	 */
-	public T[] getInorder()
-	{
+	public T[] getInorder() {
 		list = new LinkedList<Knoten<T>>();
 
-		if (wurzel.getKnotenSonLinks() != null)
-		{
+		if (wurzel.getKnotenSonLinks() != null) {
 			inorderLeft(wurzel.getKnotenSonLinks());
 		}
-		if (wurzel.getKnotenSonRechts() != null)
-		{
+		if (wurzel.getKnotenSonRechts() != null) {
 			inorderRight(wurzel.getKnotenSonRechts());
 		}
 
@@ -61,13 +56,11 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	 * 
 	 * @return T[]
 	 */
-	private T[] listToTArray()
-	{
+	private T[] listToTArray() {
 		@SuppressWarnings("unchecked")
 		T[] array = (T[]) new Object[list.size()];
 
-		for (int i = 0; i < array.length; i++)
-		{
+		for (int i = 0; i < array.length; i++) {
 			array[i] = list.get(i).getElement();
 		}
 		return array;
@@ -78,15 +71,12 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	 * 
 	 * @param k
 	 */
-	private void inorderLeft(Knoten<T> k)
-	{
+	private void inorderLeft(Knoten<T> k) {
 		list.add(list.indexOf(k.getKnotenFather()), k);
-		if (k.getKnotenSonLinks() != null)
-		{
+		if (k.getKnotenSonLinks() != null) {
 			inorderLeft(k.getKnotenSonLinks());
 		}
-		if (k.getKnotenSonRechts() != null)
-		{
+		if (k.getKnotenSonRechts() != null) {
 			inorderRight(k.getKnotenSonRechts());
 		}
 	}
@@ -96,29 +86,28 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	 * 
 	 * @param k
 	 */
-	private void inorderRight(Knoten<T> k)
-	{
+	private void inorderRight(Knoten<T> k) {
 		list.add(list.indexOf(k.getKnotenFather()) + 1, k);
-		if (k.getKnotenSonLinks() != null)
-		{
+		if (k.getKnotenSonLinks() != null) {
 			inorderLeft(k.getKnotenSonLinks());
 		}
-		if (k.getKnotenSonRechts() != null)
-		{
+		if (k.getKnotenSonRechts() != null) {
 			inorderRight(k.getKnotenSonRechts());
 		}
 	}
 
 	/**
 	 * Hilfsmethode zum Ausgeben der Hauptreihenfolge.
-	 * @param index: Index im Array
+	 * 
+	 * @param index:
+	 *            Index im Array
 	 */
-	public void preorder(Knoten k){
+	public void preorder(Knoten k) {
 		list.add(k);
-		if(k.getKnotenSonLinks()!=null){
+		if (k.getKnotenSonLinks() != null) {
 			preorder(k.getKnotenSonLinks());
 		}
-		if(k.getKnotenSonRechts()!= null){
+		if (k.getKnotenSonRechts() != null) {
 			preorder(k.getKnotenSonRechts());
 		}
 	}
@@ -126,105 +115,108 @@ public abstract class BinSuchbaum<T extends Comparable<T>>
 	/**
 	 * Hilfsmethode zum Ausgeben der Nebenreihenfolge.y
 	 */
-	public void postorder(Knoten k){
-		if(k.getKnotenSonLinks()!=null){
+	public void postorder(Knoten k) {
+		if (k.getKnotenSonLinks() != null) {
 			postorder(k.getKnotenSonLinks());
 		}
-		
-		if(k.getKnotenSonRechts()!= null){
+
+		if (k.getKnotenSonRechts() != null) {
 			postorder(k.getKnotenSonRechts());
 		}
 		list.add(k);
 	}
-	
+
 	/**
 	 * Hilfsmethode zum Ausgeben der Symmetrischenreihenfolge.
-	 * @param index: Index im Array
+	 * 
+	 * @param index:
+	 *            Index im Array
 	 */
-	public void inorder(Knoten k){
-		if(k.getKnotenSonLinks()!=null){
+	public void inorder(Knoten k) {
+		if (k.getKnotenSonLinks() != null) {
 			inorder(k.getKnotenSonLinks());
 		}
 		list.add(k);
-		
-		if(k.getKnotenSonRechts()!= null){
+
+		if (k.getKnotenSonRechts() != null) {
 			inorder(k.getKnotenSonRechts());
 		}
-		
+
 	}
 
-	public int sum(int min, int max)
-	{
+	protected void addKleinerZahlen(Knoten<T> knoten) {
+		list.clear();
+		inorder(wurzel);
+		Iterator<Knoten<T>> it = list.iterator();
+		Knoten<T> node;
+		while (it.hasNext()) {
+			node = it.next();
+			if ((int) node.getElement().compareTo( knoten.getElement()) > 0) {
+				node.addAlleZahlenKleiner((int)knoten.getElement());
+			}
+			else if((int) node.getElement().compareTo( knoten.getElement()) < 0){
+				knoten.addAlleZahlenKleiner((int)node.getElement());
+			}
+		}
+	}
+
+	public int sum(int min, int max) {
 		Knoten<T> minKnoten = null, maxKnoten = null, wurzel = this.wurzel;
-		if (wurzel.getElement() instanceof Integer)
-		{
-			while ((int) wurzel.getElement() > max
-					|| (int) wurzel.getElement() < min)
-			{
-				if ((int) wurzel.getElement() > max)
-				{
+		if (wurzel.getElement() instanceof Integer) {
+			while ((int) wurzel.getElement() > max || (int) wurzel.getElement() < min) {
+				if ((int) wurzel.getElement() > max) {
 					wurzel = wurzel.getKnotenSonLinks();
-				}
-				else if ((int) wurzel.getElement() < min)
-				{
+				} else if ((int) wurzel.getElement() < min) {
 					wurzel = wurzel.getKnotenSonRechts();
 				}
 			}
 
-			
 			/*
-			while (minKnoten.getKnotenSonLinks() != null
-					&& (int) minKnoten.getKnotenSonLinks().getElement() >= min)
-			{
-				minKnoten = minKnoten.getKnotenSonLinks();
-			}
+			 * while (minKnoten.getKnotenSonLinks() != null && (int)
+			 * minKnoten.getKnotenSonLinks().getElement() >= min) { minKnoten =
+			 * minKnoten.getKnotenSonLinks(); }
+			 * 
+			 * while (maxKnoten.getKnotenSonLinks() != null && (int)
+			 * maxKnoten.getKnotenSonRechts().getElement() <= max) { maxKnoten =
+			 * maxKnoten.getKnotenSonRechts(); }
+			 */
 
-			while (maxKnoten.getKnotenSonLinks() != null
-					&& (int) maxKnoten.getKnotenSonRechts().getElement() <= max)
-			{
-				maxKnoten = maxKnoten.getKnotenSonRechts();
-			}
-			*/
-			
 			Iterator<Knoten<T>> it = list.iterator();
-			
-			int smallestDiff = Integer.MAX_VALUE;;
-			
-			//get Node near min
+
+			int smallestDiff = Integer.MAX_VALUE;
+			;
+
+			// get Node near min
 			Knoten<T> node;
-			do{
-				node =  it.next();
-				if(Math.abs((Integer) node.getElement() - min )<= smallestDiff){
-					minKnoten=node;
-					smallestDiff= Math.abs((Integer) node.getElement() - min);
+			do {
+				node = it.next();
+				if (Math.abs((Integer) node.getElement() - min) <= smallestDiff) {
+					minKnoten = node;
+					smallestDiff = Math.abs((Integer) node.getElement() - min);
 				}
-			}while(it.hasNext());
-			
-			//get Node near max
+			} while (it.hasNext());
+
+			// get Node near max
 			smallestDiff = Integer.MAX_VALUE;
 			it = list.iterator();
-			do{
-				node =  it.next();
-				if(Math.abs((Integer) node.getElement() - max )<= smallestDiff){
-					maxKnoten=node;
-					smallestDiff= Math.abs((Integer) node.getElement() - max);
+			do {
+				node = it.next();
+				if (Math.abs((Integer) node.getElement() - max) <= smallestDiff) {
+					maxKnoten = node;
+					smallestDiff = Math.abs((Integer) node.getElement() - max);
 				}
-			}while(it.hasNext());
-			
-			
-			
-			int debug =0;
-			
-			//maxknoten ist father von minKnoten
-			if(maxKnoten.getKnotenSonLinks() == minKnoten){
+			} while (it.hasNext());
+
+
+			// maxknoten ist father von minKnoten oder andersrum
+			if (maxKnoten.getKnotenSonLinks() == minKnoten || minKnoten.getKnotenFather() == maxKnoten) {
 				return 0;
 			}
+
+//			return wurzel.getSumLinks() + wurzel.getSumRechts() - minKnoten.getSumLinks() - maxKnoten.getSumRechts()
+//					+ (Integer) wurzel.getElement();
 			
-			return  wurzel.getSumLinks() + wurzel.getSumRechts()
-			- minKnoten.getSumLinks() - maxKnoten.getSumRechts()
-			+ (Integer) wurzel.getElement();
-			
-		
+			return maxKnoten.getAlleZahlenKleiner()-minKnoten.getAlleZahlenKleiner()-(int)minKnoten.getElement();
 
 		}
 		return 0;

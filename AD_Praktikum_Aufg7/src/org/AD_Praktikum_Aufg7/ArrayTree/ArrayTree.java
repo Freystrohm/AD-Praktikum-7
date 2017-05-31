@@ -33,6 +33,7 @@ public class ArrayTree<T extends Comparable<T>> extends BinSuchbaum<T> {
 		if (array[index] == null) {
 			knoten.array= array;
 			knoten.setIndex(index);
+			this.addKleinerZahlen(knoten);
 			array[index] = knoten;
 		} else if (knoten.getElement().compareTo(array[index].getElement()) < 0) {
 			array[index].sumlinks+=(int)knoten.getElement();
