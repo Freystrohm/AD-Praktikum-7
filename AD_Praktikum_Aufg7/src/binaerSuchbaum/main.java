@@ -31,17 +31,17 @@ public class main
 //
 //		System.out.println("Summe 3- 9:" + a.sum(3, 9));
 		
-		BinSuchbaum<Integer> b = new PTree(new PKnoten<Integer>(6));
+		BinSuchbaum<Integer> b = new ArrayTree(new AKnoten<Integer>(6));
 
-		b.insertKnoten(new PKnoten<Integer>(4));
-		b.insertKnoten(new PKnoten<Integer>(9));
-		b.insertKnoten(new PKnoten<Integer>(7));
-		b.insertKnoten(new PKnoten<Integer>(8));
-		b.insertKnoten(new PKnoten<Integer>(3));
-		b.insertKnoten(new PKnoten<Integer>(5));
+		b.insertKnoten(new AKnoten<Integer>(4));
+		b.insertKnoten(new AKnoten<Integer>(9));
+		b.insertKnoten(new AKnoten<Integer>(7));
+		b.insertKnoten(new AKnoten<Integer>(8));
+		b.insertKnoten(new AKnoten<Integer>(3));
+		b.insertKnoten(new AKnoten<Integer>(5));
 		
 		b.inorder(b.wurzel);
-		System.out.println("Sum: "+b.sum(3, 500));
+		System.out.println("Sum: "+b.sum(8, 9));
 		
 	}
 
