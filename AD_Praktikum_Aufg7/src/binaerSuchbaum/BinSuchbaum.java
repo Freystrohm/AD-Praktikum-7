@@ -208,10 +208,7 @@ public abstract class BinSuchbaum<T extends Comparable<T>> {
 			} while (it.hasNext());
 
 
-			// maxknoten ist father von minKnoten oder andersrum
-			if (maxKnoten.getKnotenSonLinks() == minKnoten || minKnoten.getKnotenFather() == maxKnoten) {
-				return 0;
-			}
+		
 
 //			return wurzel.getSumLinks() + wurzel.getSumRechts() - minKnoten.getSumLinks() - maxKnoten.getSumRechts()
 //					+ (Integer) wurzel.getElement();
