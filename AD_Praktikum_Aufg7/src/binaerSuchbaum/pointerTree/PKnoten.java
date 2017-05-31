@@ -8,53 +8,58 @@ package binaerSuchbaum.pointerTree;
 
 import binaerSuchbaum.Knoten;
 
-public class PKnoten<T extends Comparable<T>> implements Knoten<T>
-{
+public class PKnoten<T extends Comparable<T>> implements Knoten<T> {
 	PKnoten<T> father, sonLinks, sonRechts;
 	public T element;
-	int sumlinks, sumrechts;
+	int sumlinks, sumrechts, sumAlleKleinereZahlen;
 
-	public PKnoten(T value)
-	{
+	public PKnoten(T value) {
 		element = value;
 		sumlinks = 0;
 		sumrechts = 0;
+		sumAlleKleinereZahlen = 0;
 	}
 
 	@Override
-	public T getElement()
-	{
+	public T getElement() {
 		return element;
 	}
 
 	@Override
-	public Knoten<T> getKnotenSonLinks()
-	{
+	public Knoten<T> getKnotenSonLinks() {
 		return sonLinks;
 	}
 
 	@Override
-	public Knoten<T> getKnotenSonRechts()
-	{
+	public Knoten<T> getKnotenSonRechts() {
 		return sonRechts;
 	}
 
 	@Override
-	public Knoten<T> getKnotenFather()
-	{
+	public Knoten<T> getKnotenFather() {
 		return father;
 	}
 
 	@Override
-	public int getSumRechts()
-	{
+	public int getSumRechts() {
 		return sumrechts;
 	}
 
 	@Override
-	public int getSumLinks()
-	{
+	public int getSumLinks() {
 		return sumlinks;
+	}
+
+	@Override
+	public void addAlleZahlenKleiner(int toAdd) {
+		sumAlleKleinereZahlen+=toAdd;
+		
+	}
+
+	@Override
+	public int getAlleZahlenKleiner() {
+		// TODO Auto-generated method stub
+		return sumAlleKleinereZahlen;
 	}
 
 }

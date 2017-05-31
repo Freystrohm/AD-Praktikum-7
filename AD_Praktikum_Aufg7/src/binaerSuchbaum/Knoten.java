@@ -26,4 +26,8 @@ public interface Knoten<T extends Comparable<T>>
 	public int getSumRechts();
 
 	public int getSumLinks();
+	
+	public void addAlleZahlenKleiner(int toAdd);
+	
+	public int getAlleZahlenKleiner();
 }
